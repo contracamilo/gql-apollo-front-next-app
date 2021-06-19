@@ -9,11 +9,13 @@ import { GET_AUTH_USER } from "../data-access";
 const Layout = ({ children }) => {
   const [userId, setUserId] = useState("");
   const { data } = useQuery(GET_AUTH_USER);
-  const { pathname, push } = useRouter();
+  const { pathname } = useRouter();
 
   useEffect(() => {
-    setUserId(data?.getAuthUser.id);
-  }, [data]);
+    const id = data?.getAuthUser?.id;
+
+    setUserId(id);
+  }, [data, pathname, setUserId]);
 
   return (
     <>
