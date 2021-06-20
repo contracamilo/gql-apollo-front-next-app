@@ -1,0 +1,16 @@
+import { SELECT_CLIENT, SELECT_PRODUCT, PRODUCT_QUANTITY } from "../../types";
+
+const OrderReducer = (state, action) => {
+  switch (action.type) {
+    case SELECT_CLIENT:
+      return {
+        ...state,
+        client: action.payload,
+      };
+
+    default:
+      break;
+  }
+};
+
+export default OrderReducer;
