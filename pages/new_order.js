@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import { useMutation } from "@apollo/client";
 import AssignClient from "../components/Order/AssignClient";
 import AssignProduct from "../components/Order/AssignProducts";
-import { NEW_ORDER } from "../data-access";
+import { NEW_ORDER, GET_ORDERS_BY_SALESPERSON } from "../data-access";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
@@ -16,7 +16,23 @@ const NewOrder = () => {
   const router = useRouter();
   const [message, setMessage] = useState(null);
   const { clients, products, total } = useContext(OrderContext);
-  const [newOrder] = useMutation(NEW_ORDER);
+
+  const [newOrder] = useMutation(NEW_ORDER, {
+    update(cache, { data: { newOrder } }) {
+      const { getOrdersBySalesPerson } = cache.readQuery({
+        query: GET_ORDERS_BY_SALESPERSON,
+      });
+
+      console.log(getOrdersBySalesPerson);
+
+      cache.writeQuery({
+        query: GET_ORDERS_BY_SALESPERSON,
+        data: {
+          getOrdersBySalesPerson: [...getOrdersBySalesPerson, newOrder],
+        },
+      });
+    },
+  });
 
   const validateOrder = () => {
     const validation = !products.every(
@@ -28,18 +44,18 @@ const NewOrder = () => {
 
   const createNewOrder = async () => {
     //set productOrder
-
     const { id } = clients[0];
-    console.log(id);
+
     const order = products.map(({ stock, __typename, ...product }) => product);
 
     try {
-      const { data } = await newOrder({
+      await newOrder({
         variables: {
           input: {
             client: id,
             total,
             order,
+            status: "PENDING",
           },
         },
       });
