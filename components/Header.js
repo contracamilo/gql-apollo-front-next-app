@@ -10,8 +10,8 @@ const Header = ({ userId = "" }) => {
   };
 
   return (
-    <div className="flex justify-between mb-6">
-      <p className="mr-2">Hola {`${userId}`}</p>
+    <div className="sm:flex sm:justify-between mb-6 lg:mb-0">
+      <p className="mr-2 mb-5">Hola {`${userId}`}</p>
       <button
         onClick={singOut}
         className="bg-blue-800 text-white w-full sm:w-auto font-bold uppercase text-xs rounded py-1 px-2 shadow-md"

@@ -24,3 +24,15 @@ export const GET_CLIENT_BY_ID = gql`
     }
   }
 `;
+
+export const GET_TOP_CLIENTS = gql`
+  query getTopClients {
+    getTopClients {
+      client {
+        name
+        company
+      }
+      total
+    }
+  }
+`;

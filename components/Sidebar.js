@@ -28,6 +28,24 @@ const Sidebar = () => {
           </li>
         </ul>
       </nav>
+
+      <div className=" sm:mt-10"></div>
+      <h2 className="text-white text-2xl font-black">Other Options</h2>
+
+      <nav>
+        <ul className="mt-5 list-none">
+          <li className={pathname === "/" ? "bg-blue-800 p-3" : "p-3"}>
+            <Link href="/best_sales_persons">
+              <a className="text-white mb-0 block">Bests Sales Persons</a>
+            </Link>
+          </li>
+          <li className={pathname === "/orders" ? "bg-blue-800 p-3" : "p-3"}>
+            <Link href="/best_clients">
+              <a className="text-white mb-0 block">Best Clients</a>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </aside>
   );
 };

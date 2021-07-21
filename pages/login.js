@@ -37,8 +37,10 @@ const Login = () => {
 
         storeMessage(`validating credentials...`);
 
-        const { token } = data?.authUser;
-        localStorage.setItem("token", token);
+        setTimeout(() => {
+          const { token } = data?.authUser;
+          localStorage.setItem("token", token);
+        }, 1000);
 
         setTimeout(() => {
           storeMessage(null);

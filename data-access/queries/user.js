@@ -17,3 +17,15 @@ export const GET_USER_BY_ID = gql`
     }
   }
 `;
+
+export const GET_TOP_SALES_PERSON = gql`
+  query getTopSalesPerson {
+    getTopSalesPerson {
+      total
+      salesPerson {
+        name
+        email
+      }
+    }
+  }
+`;
